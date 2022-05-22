@@ -1,0 +1,51 @@
+.side-block_container {
+  display: flex;
+  flex-direction: column;
+}
+.side-block {
+  display: flex;
+  background-color: #4f4f4f;
+  box-shadow: 2px 5px 25px -3px rgba(180, 180, 180, 0.25);
+  flex-basis: 300px;
+  padding: 20px;
+  border-radius: 20px;
+  box-sizing: border-box;
+  position: relative;
+}
+.side-block_deg {
+  display: block;
+  color: #4793ff;
+  font-weight: 400;
+  font-size: 96px;
+  line-height: 117px;
+}
+.side-block_day {
+  color: #fff;
+  font-weight: 400;
+  font-size: 40px;
+  line-height: 49px;
+  font-size: 40px;
+}
+.side-block_time {
+  margin-bottom: 14px;
+  margin-top: 31px;
+  line-height: 30px;
+  inline-size: 183px;
+  width: 100%;
+}
+.side-block_time,
+.side-block_townName {
+  font-style: normal;
+  font-weight: 400;
+  font-size: 25px;
+  line-height: 30px;
+  color: #939cb0;
+}
+.side-block_townName {
+  display: block;
+}
+.weather-icon {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+}

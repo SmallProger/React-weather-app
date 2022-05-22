@@ -1,0 +1,30 @@
+.indicators-block {
+  padding: 39px;
+  background-color: #939cb0;
+  flex-basis: 750px;
+  background-size: cover;
+  box-shadow: 2px 5px 25px -3px rgb(180 180 180 / 25%);
+  border-radius: 20px;
+  display: flex;
+  position: relative;
+}
+.indicators-block_list {
+  color: #fff;
+  list-style-type: none;
+  display: flex;
+  gap: 40px;
+  flex-direction: column;
+  padding: 10px;
+}
+.indicators-block_list_item {
+  display: flex;
+  align-items: center;
+  gap: 25px;
+}
+.indicators-block_clouds {
+  position: absolute;
+  width: 460px;
+  height: 202px;
+  top: 0;
+  right: 0;
+}

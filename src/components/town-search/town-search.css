@@ -1,0 +1,39 @@
+.town-search {
+  font-family: "Montserrat", sans-serif;
+  font-weight: 400;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  position: relative;
+}
+.town-search:focus {
+  border: unset;
+}
+.town-search_input {
+  border-radius: 20px;
+  height: 40px;
+  width: 500px;
+  border: 5px solid #939cb0;
+  background-color: #eaecf3;
+  padding: 0 10px;
+  font-size: 16px;
+}
+.town-search_button {
+  border-radius: 20px;
+  font-size: 17px;
+  width: 127px;
+  height: 52px;
+  background-color: #4793ff;
+  border: unset;
+  color: #fff;
+  cursor: pointer;
+}
+.app-name {
+  /* color: #4793ff; */
+  color: #4793ff;
+  font-size: 40px;
+}
+.header {
+  display: flex;
+  gap: 70px;
+}
