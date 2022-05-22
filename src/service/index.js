@@ -1,5 +1,6 @@
+import APIkey from "./keys";
 export default class Service {
-  _apiKey = "6fc7b33b4fc9f58e0d7b28063d8e2897";
+  _apiKey = APIkey;
   async getCoords(cityName) {
     const limit = 1;
     let answer;
