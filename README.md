@@ -1,3 +1,10 @@
+# How it looks
+![image](https://user-images.githubusercontent.com/81322767/169705165-601844e1-a947-4478-a682-6baddde2fcf0.png)
+
+# Sources
+
+The project was created using API OpenWeatherMap and owfont (link: http://websygen.github.io/owfont/)
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
