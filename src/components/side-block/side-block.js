@@ -6,17 +6,16 @@ import Spinner from "../../service/spinner";
 export default class SideBlock extends React.Component {
   constructor(props) {
     super(props);
-    let { time, timezone, loading } = props;
+    const { timezone } = props.data;
     this.state = {
-      time,
+      time: null,
       timezone,
-      loading,
     };
     this.timer = null;
     this.getTime(timezone);
   }
   switchToTwoDigit(num) {
-    if (num < 9) {
+    if (num <= 9) {
       return "0" + num;
     } else {
       return num;
@@ -41,34 +40,34 @@ export default class SideBlock extends React.Component {
       });
     }, 1000);
   }
-  componentDidUpdate(prevProps) {
-    let { timezone, loading } = this.props;
-    if (prevProps.timezone !== timezone) {
+  handleTownNameOutput(townName) {
+    let arr = townName.split(" ");
+    arr = arr.map((word) => {
+      let wordSplit = word.split("");
+      wordSplit[0] = wordSplit[0].toUpperCase("");
+      return wordSplit.join("");
+    });
+    return arr.join(" ");
+  }
+  componentDidUpdate(prevProps, prevState) {
+    let { timezone } = this.props.data;
+    if (prevState.timezone !== timezone) {
       this.setState({
         timezone,
       });
       clearInterval(this.timer);
       this.getTime(timezone);
     }
-    if (prevProps.loading !== loading) {
-      this.setState({
-        loading,
-      });
-    }
   }
   componentWillUnmount() {
     clearInterval(this.timer);
   }
   render() {
-    let { temp, townName, weatherId } = this.props;
-    let { time, loading } = this.state;
-    let error = false;
-    if (!townName) {
-      error = true;
-    }
+    let { data, loading, townName } = this.props;
+    let { time } = this.state;
     const spinner = loading ? <Spinner /> : null;
     const content = !loading
-      ? GetContent(temp, townName, weatherId, time, error)
+      ? GetContent(data, this.handleTownNameOutput(townName), time)
       : null;
     return (
       <section className="side-block">
@@ -78,16 +77,13 @@ export default class SideBlock extends React.Component {
     );
   }
 }
-const GetContent = (temp, townName, weatherId, time, error) => {
+const GetContent = ({ temp, weatherId }, townName, time) => {
   return (
     <>
       <div className="side-block_container">
         <span className="side-block_deg">{temp}</span>
         <span className="side-block_day">Today</span>
-        <span className="side-block_time">
-          {"Time: "}
-          {error ? "not defined" : `${time}`}
-        </span>
+        <span className="side-block_time">{`Time: ${time}`}</span>
         <span className="side-block_townName">{`Town: ${townName}`}</span>
       </div>
       <i className={`owf owf-8x owf-${weatherId} weather-icon`}></i>

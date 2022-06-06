@@ -5,17 +5,20 @@ export default class TownSearch extends React.Component {
   state = {
     value: "",
   };
-  HandleSubmit = (e) => {
+  _handleTownNameInput(input) {
+    let resultHandling = input.replace(/\s+/g, " ").trim();
+    return resultHandling;
+  }
+  _handleSubmit = (e) => {
     e.preventDefault();
     const townSearchInput = document.querySelector(".town-search_input");
     let { onTownSearch } = this.props;
     if (townSearchInput.value) {
-      let value = townSearchInput.value;
-      console.log(value);
+      let value = this._handleTownNameInput(townSearchInput.value);
       onTownSearch(value);
     }
   };
-  HandleChange = (e) => {
+  _handleChange = (e) => {
     let value = e.target.value;
     this.setState({
       value,
@@ -25,11 +28,11 @@ export default class TownSearch extends React.Component {
     return (
       <header className="header">
         <h1 className="app-name">WEATHER APP</h1>
-        <form className="town-search" onSubmit={this.HandleSubmit}>
+        <form className="town-search" onSubmit={this._handleSubmit}>
           <input
             className="town-search_input"
             value={this.state.value}
-            onChange={this.HandleChange}
+            onChange={this._handleChange}
             placeholder="write the city name here"
           ></input>
           <button className="town-search_button">search</button>

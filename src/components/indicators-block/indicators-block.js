@@ -6,14 +6,8 @@ import temperatureImg from "../../images/params/temperature.svg";
 import windImg from "../../images/params/wind.svg";
 import Spinner from "../../service/spinner";
 import cloudsImg from "../../images/background/cloud-image.svg";
+import Row from "./row";
 export default class IndicatorsBlock extends React.Component {
-  constructor(props) {
-    super(props);
-    let { loading } = props;
-    this.state = {
-      loading,
-    };
-  }
   handleRainData(data) {
     if (data) {
       return `${data["1h"]} mm`;
@@ -21,22 +15,11 @@ export default class IndicatorsBlock extends React.Component {
       return "no precipitation";
     }
   }
-  componentDidUpdate(prevProps) {
-    let { loading } = this.props;
-    if (prevProps.loading !== loading) {
-      console.log("here", loading);
-      this.setState({
-        loading,
-      });
-    }
-  }
   render() {
-    let { pressure, temp, speed, rain } = this.props;
-    let { loading } = this.state;
+    const { data } = this.props;
+    let { loading } = this.props;
     let spinner = loading ? <Spinner /> : null;
-    let content = !loading
-      ? GetContent(pressure, temp, speed, rain, this.handleRainData)
-      : null;
+    let content = !loading ? GetContent(data, this.handleRainData) : null;
     return (
       <section className="indicators-block">
         <img className="indicators-block_clouds" src={cloudsImg} alt="clouds" />
@@ -46,27 +29,23 @@ export default class IndicatorsBlock extends React.Component {
     );
   }
 }
-const GetContent = (pressure, temp, speed, rain, handleRainData) => {
+const GetContent = ({ pressure, temp, speed, rain }, handleRainData) => {
   return (
     <ul className="indicators-block_list">
-      <li className="indicators-block_list_item">
-        <img src={pressureImg} width={25} height={25} alt="pressure" />
+      <Row imgSrc={pressureImg} imgAlt={"pressure"}>
         <span>{`Atmospheric pressure: ${pressure} hPa`}</span>
-      </li>
-      <li className="indicators-block_list_item">
-        <img src={windImg} width={25} height={25} alt="wind" />
+      </Row>
+      <Row imgSrc={windImg} imgAlt={"wind"}>
         <span>{`Wind speed: ${speed} meter/sec`}</span>
-      </li>
-      <li className="indicators-block_list_item">
-        <img src={rainImg} width={25} height={25} alt="rain" />
+      </Row>
+      <Row imgSrc={rainImg} imgAlt={"rain"}>
         <span>{`Rain volume for the last 1 hour: ${handleRainData(
           rain
         )}`}</span>
-      </li>
-      <li className="indicators-block_list_item">
-        <img src={temperatureImg} width={25} height={25} alt="temperature" />
+      </Row>
+      <Row imgSrc={temperatureImg} imgAlt={"temperature"}>
         <span>{`Temperature: ${temp}`}</span>
-      </li>
+      </Row>
     </ul>
   );
 };
